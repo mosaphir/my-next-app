@@ -1,8 +1,18 @@
 import { generateCreditCard } from '@mihnea.dev/credit-card-generator';
+import validateCreditCardNumber from '../utils/validateCreditCard';
 
 const GeneratePage = () => {
   const [bin, setBin] = useState('');
   const [creditCard, setCreditCard] = useState({});
+
+  const handleGenerate = async () => {
+    const creditCardData = generateCreditCard(bin);
+    if (validateCreditCardNumber(creditCardData.cardNumber)) {
+      setCreditCard(creditCardData);
+    } else {
+      alert('Invalid credit card number');
+    }
+  };
 
   const handleGenerate = async () => {
     const creditCardData = generateCreditCard(bin);
